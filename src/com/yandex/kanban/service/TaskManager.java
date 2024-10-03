@@ -60,11 +60,10 @@ public class TaskManager {
     }
 
     public void removeEpic(Integer id) {
-        EpicTask epic = epics.get(id);
+        EpicTask epic = epics.remove(id);
         for (Integer item : epic.getSubTaskIds()) {
             subtasks.remove(item);
         }
-        epics.remove(id);
     }
 
     public Task getEpic(Integer id) {
@@ -74,38 +73,16 @@ public class TaskManager {
     public void addSubtask(Subtask subtask) {
         subtask.setId(nextId++);
         subtasks.put(subtask.getId(), subtask);
-        updateStatus(subtask);
         EpicTask epic = epics.get(subtask.getEpicId());
         epic.getSubTaskIds().add(subtask.getId());
+        int foundEpicId =  subtasks.get(subtask.getId()).getEpicId();
+        updateStatus(foundEpicId);
     }
 
     public void updateSubtask(Subtask subtask) {
         subtasks.put(subtask.getId(), subtask);
-        updateStatus(subtask);
-    }
-
-    public void updateStatus(Subtask subtask){
-        EpicTask epic = epics.get(subtask.getEpicId());
-
-        int countNew = 0;
-        int countDone = 0;
-
-        for (Integer taskId : epic.getSubTaskIds()) {
-            Subtask task = subtasks.get(taskId);
-            if (task.status == StatusTask.NEW) {
-                countNew = countNew + 1;
-            } else if (task.status == StatusTask.DONE) {
-                countDone = countDone + 1;
-            }
-        }
-
-        if (countNew == epic.getSubTaskIds().size()) {
-            epic.status = StatusTask.NEW;
-        } else if (countDone == epic.getSubTaskIds().size()) {
-            epic.status = StatusTask.DONE;
-        } else {
-            epic.status = StatusTask.IN_PROGRESS;
-        }
+        int foundEpicId =  subtasks.get(subtask.getId()).getEpicId();
+        updateStatus(foundEpicId);
     }
 
     public ArrayList<Task> getListSubtask() {
@@ -114,10 +91,10 @@ public class TaskManager {
 
     public void clearSubtasks() {
         subtasks.clear();
-        for (Integer item : epics.keySet()){
-            ArrayList<Integer> values = epics.get(item).getSubTaskIds();
+        for (EpicTask epicTask : epics.values()) {
+            ArrayList<Integer> values = epicTask.getSubTaskIds();
             values.clear();
-            epics.get(item).status = StatusTask.NEW;
+            epicTask.setStatus(StatusTask.NEW);
         }
     }
 
@@ -125,26 +102,7 @@ public class TaskManager {
        int foundEpicId =  subtasks.get(id).getEpicId();
        epics.get(foundEpicId).getSubTaskIds().remove(id);
        subtasks.remove(id);
-
-        int countNew = 0;
-        int countDone = 0;
-
-        for (Integer taskId : epics.get(foundEpicId).getSubTaskIds()) {
-            Subtask task = subtasks.get(taskId);
-            if (task.status == StatusTask.NEW) {
-                countNew = countNew + 1;
-            } else if (task.status == StatusTask.DONE) {
-                countDone = countDone + 1;
-            }
-        }
-
-        if (countNew == epics.get(foundEpicId).getSubTaskIds().size()) {
-            epics.get(foundEpicId).status = StatusTask.NEW;
-        } else if (countDone == epics.get(foundEpicId).getSubTaskIds().size()) {
-            epics.get(foundEpicId).status = StatusTask.DONE;
-        } else {
-            epics.get(foundEpicId).status = StatusTask.IN_PROGRESS;
-        }
+       updateStatus(foundEpicId);
     }
 
     public Task getSubtask(Integer id) {
@@ -158,6 +116,31 @@ public class TaskManager {
         return list;
     }
 
+    private void updateStatus(Integer foundEpicId) {
+
+        int countNew = 0;
+        int countDone = 0;
+
+        for (Integer taskId : epics.get(foundEpicId).getSubTaskIds()) {
+            Subtask task = subtasks.get(taskId);
+            if (task.getStatus() == StatusTask.NEW) {
+                countNew++;
+            } else if (task.getStatus() == StatusTask.DONE) {
+                countDone++;
+            } else {
+                epics.get(foundEpicId).setStatus(StatusTask.IN_PROGRESS);
+                return;
+            }
+        }
+
+        if (countNew == epics.get(foundEpicId).getSubTaskIds().size()) {
+            epics.get(foundEpicId).setStatus(StatusTask.NEW);
+        } else if (countDone == epics.get(foundEpicId).getSubTaskIds().size()) {
+            epics.get(foundEpicId).setStatus(StatusTask.DONE);
+        } else {
+            epics.get(foundEpicId).setStatus(StatusTask.IN_PROGRESS);
+        }
+    }
 
     @Override
     public String toString() {
