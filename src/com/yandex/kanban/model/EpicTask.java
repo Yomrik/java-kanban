@@ -1,6 +1,7 @@
 package com.yandex.kanban.model;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class EpicTask extends Task {
     private final ArrayList<Integer> subTaskIds = new ArrayList<>();
@@ -13,5 +14,6 @@ public class EpicTask extends Task {
     public ArrayList<Integer> getSubTaskIds() {
         return subTaskIds;
     }
+
 }
 
