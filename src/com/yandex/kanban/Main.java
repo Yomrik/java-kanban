@@ -6,6 +6,8 @@ import com.yandex.kanban.model.Subtask;
 import com.yandex.kanban.model.Task;
 import com.yandex.kanban.service.*;
 
+import java.util.List;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -50,9 +52,9 @@ public class Main {
 
                                                        // обновляем подзадачу
 
-//        Subtask subtask4 = new Subtask(StatusTask.DONE, "Заменить подзадачу №1", "Задача на замену", epic1.getId());
-//        subtask4.setId(subtask1.getId());
-//        taskManager.updateSubtask(subtask4);
+        Subtask subtask4 = new Subtask(StatusTask.DONE, "Заменить подзадачу №1", "Задача на замену", epic1.getId());
+        subtask4.setId(subtask1.getId());
+        taskManager.updateSubtask(subtask4);
 
                                                       //Выводим обновленные списки задач
 
@@ -70,8 +72,8 @@ public class Main {
 
                                                      //Удаляем одну простую задачу и эпик
 
-        //taskManager.removeTask(1);
-        //taskManager.removeEpic(3);
+        taskManager.removeTask(1);
+        taskManager.removeEpic(6);
 
                                                      //Выводим обновленные списки задач
 
@@ -94,28 +96,26 @@ public class Main {
 
                                                      //Добавляем просмотренные задачи в список истории
 
-        historyManager.add(taskManager.getTask(2));
-        historyManager.add(taskManager.getTask(2));
-        historyManager.add(taskManager.getEpic(3));
-        historyManager.add(taskManager.getSubtask(4));
-        historyManager.add(taskManager.getSubtask(5));
-        historyManager.add(taskManager.getEpic(3));
-        historyManager.add(taskManager.getTask(2));
-        historyManager.add(taskManager.getEpic(3));
-        historyManager.add(taskManager.getSubtask(4));
-        historyManager.add(taskManager.getSubtask(5));
-        historyManager.add(taskManager.getEpic(3));
-        historyManager.add(taskManager.getSubtask(4));
+        taskManager.getTask(2);
+        taskManager.getTask(2);
+        taskManager.getEpic(3);
+        taskManager.getSubtask(4);
+        taskManager.getSubtask(5);
+        taskManager.getEpic(3);
+        taskManager.getTask(2);
+        taskManager.getEpic(3);
+        taskManager.getSubtask(4);
+        taskManager.getSubtask(5);
+        taskManager.getEpic(3);
+        taskManager.getSubtask(4);
 
         /*
         Проверяем, что количество задач не превышает 10, новые задачи
         добавляются в начало списка, а самые старые удаляются
         */
 
-        for(Task item : historyManager.getHistory()) {
+        for(Task item : taskManager.getListHystory()) {
             System.out.println(item);
         }
-
-
     }
 }

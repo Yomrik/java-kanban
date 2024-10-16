@@ -1,4 +1,4 @@
-package com.yandex.kanban.tests;
+package com.yandex.kanban;
 
 import com.yandex.kanban.model.EpicTask;
 import com.yandex.kanban.model.StatusTask;

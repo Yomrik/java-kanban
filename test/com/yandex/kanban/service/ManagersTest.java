@@ -1,6 +1,5 @@
-package com.yandex.kanban.tests;
+package com.yandex.kanban.service;
 
-import com.yandex.kanban.service.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -10,7 +9,6 @@ class ManagersTest {
     void getDefault() {
         TaskManager taskManager = Managers.getDefault();
         Assertions.assertEquals(new InMemoryTaskManager(), taskManager);
-
     }
 
     @Test

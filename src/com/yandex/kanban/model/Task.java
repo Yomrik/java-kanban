@@ -32,7 +32,6 @@ public class Task {
         this.id = id;
     }
 
-
     public String getDescription() {
         return description;
     }
