@@ -6,21 +6,17 @@ import java.util.List;
 
 public class InMemoryHistoryManager implements HistoryManager  {
     private final List<Task> listHistory = new LinkedList<>();
-    private int count = 0;
     private static final int MAX_SIZE = 10;
 
     @Override
     public void add(Task task) {
-        if (listHistory.size() >= MAX_SIZE) {
-            listHistory.addFirst(task);
-            listHistory.remove(count+1);
-            if (count == 9) {
-                count = -1;
+        if (task != null) {
+            if (listHistory.size() == MAX_SIZE) {
+                listHistory.removeLast();
             }
-            count++;
-        }
-        else {
-            listHistory.add(task);
+            listHistory.addFirst(task);
+        } else {
+            System.out.println("Задача отсутствует");
         }
     }
 

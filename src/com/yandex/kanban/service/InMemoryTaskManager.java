@@ -4,16 +4,13 @@ import com.yandex.kanban.model.EpicTask;
 import com.yandex.kanban.model.StatusTask;
 import com.yandex.kanban.model.Subtask;
 import com.yandex.kanban.model.Task;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class InMemoryTaskManager implements TaskManager {
-    HistoryManager historyManager = new InMemoryHistoryManager();
-    private final HashMap<Integer, Task> tasks = new HashMap<>();
-    private final HashMap<Integer, EpicTask> epics = new HashMap<>();
-    private final HashMap<Integer, Subtask> subtasks = new HashMap<>();
+    private final HistoryManager historyManager = Managers.getDefaultHistory();
+    private final Map<Integer, Task> tasks = new HashMap<>();
+    private final Map<Integer, EpicTask> epics = new HashMap<>();
+    private final Map<Integer, Subtask> subtasks = new HashMap<>();
     private int nextId = 1;
 
     @Override
@@ -44,9 +41,9 @@ public class InMemoryTaskManager implements TaskManager {
 
     @Override
     public Task getTask(Integer id) {
-        tasks.get(id);
-        historyManager.add(tasks.get(id));
-        return tasks.get(id);
+       Task task = tasks.get(id);
+        historyManager.add(task);
+        return task;
     }
 
     @Override
@@ -83,9 +80,9 @@ public class InMemoryTaskManager implements TaskManager {
 
     @Override
     public Task getEpic(Integer id) {
-        epics.get(id);
-        historyManager.add(epics.get(id));
-        return epics.get(id);
+        Task epicTask = epics.get(id);
+        historyManager.add(epicTask);
+        return epicTask;
     }
 
     @Override
@@ -125,9 +122,9 @@ public class InMemoryTaskManager implements TaskManager {
 
     @Override
     public Task getSubtask(Integer id) {
-        subtasks.get(id);
-        historyManager.add(subtasks.get(id));
-        return subtasks.get(id);
+        Task sabtask = subtasks.get(id);
+        historyManager.add(sabtask);
+        return sabtask;
     }
 
     @Override

@@ -6,13 +6,10 @@ import com.yandex.kanban.model.Subtask;
 import com.yandex.kanban.model.Task;
 import com.yandex.kanban.service.*;
 
-import java.util.List;
-
 public class Main {
 
     public static void main(String[] args) {
         TaskManager taskManager = Managers.getDefault();
-        HistoryManager historyManager = Managers.getDefaultHistory();
 
           //Добавляем задачи
 
@@ -107,7 +104,7 @@ public class Main {
         taskManager.getSubtask(4);
         taskManager.getSubtask(5);
         taskManager.getEpic(3);
-        taskManager.getSubtask(4);
+        taskManager.getSubtask(10);
 
         /*
         Проверяем, что количество задач не превышает 10, новые задачи
