@@ -12,7 +12,7 @@ public class InMemoryHistoryManager implements HistoryManager {
     public Node<Task> first;
     public Node<Task> last;
 
-    private static class Node<Task> {
+    private static class Node<T> {
         Task task;
         Node<Task> next;
         Node<Task> prev;
