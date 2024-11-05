@@ -11,7 +11,7 @@ public class Main {
     public static void main(String[] args) {
         TaskManager taskManager = Managers.getDefault();
 
-          //Добавляем задачи
+                                                                //Добавляем задачи
 
         Task task1 = new Task(StatusTask.NEW, "сделать обычную задачу №1", "обычная задача №1");
         taskManager.addTask(task1);
@@ -28,7 +28,12 @@ public class Main {
         Subtask subtask3 = new Subtask(StatusTask.NEW, "сделать маленькую задачу №2.1", "маленькая задача №2.1", epic2.getId());
         taskManager.addSubtask(subtask3);
 
-                                                       //Выводим списки задач
+                                                                //Выводим списки задач
+
+        System.out.println("");
+        System.out.println("Выводим списки задач");
+        System.out.println("");
+
 
         for(Task item : taskManager.getListTask()) {
             System.out.println(item);
@@ -46,13 +51,15 @@ public class Main {
         System.out.println("");
         System.out.println("---------------");
         System.out.println("");
-
                                                        // обновляем подзадачу
 
         Subtask subtask4 = new Subtask(StatusTask.DONE, "Заменить подзадачу №1", "Задача на замену", epic1.getId());
         subtask4.setId(subtask1.getId());
         taskManager.updateSubtask(subtask4);
 
+        System.out.println("");
+        System.out.println("Выводим обновленные списки задач");
+        System.out.println("");
                                                       //Выводим обновленные списки задач
 
         for(Task item : taskManager.getListEpic()) {
@@ -71,8 +78,11 @@ public class Main {
 
         taskManager.removeTask(1);
         taskManager.removeEpic(6);
+                                                      //Выводим обновленные списки задач
 
-                                                     //Выводим обновленные списки задач
+        System.out.println("");
+        System.out.println("Выводим обновленные списки задач");
+        System.out.println("");
 
         for(Task item : taskManager.getListTask()) {
             System.out.println(item);
@@ -93,7 +103,12 @@ public class Main {
 
                                                      //Добавляем просмотренные задачи в список истории
 
+        System.out.println("");
+        System.out.println("Выводим историю");
+        System.out.println("");
+
         taskManager.getTask(2);
+        taskManager.getSubtask(5);
         taskManager.getTask(2);
         taskManager.getEpic(3);
         taskManager.getSubtask(4);
@@ -106,6 +121,8 @@ public class Main {
         taskManager.getEpic(3);
         taskManager.getSubtask(10);
 
+
+
         /*
         Проверяем, что количество задач не превышает 10, новые задачи
         добавляются в начало списка, а самые старые удаляются
@@ -114,5 +131,15 @@ public class Main {
         for(Task item : taskManager.getListHystory()) {
             System.out.println(item);
         }
+
+
+
+        System.out.println("");
+        System.out.println("---------------");
+        System.out.println("");
+
+
+
+
     }
 }
