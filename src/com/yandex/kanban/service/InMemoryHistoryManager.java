@@ -1,9 +1,13 @@
 package com.yandex.kanban.service;
 
 import com.yandex.kanban.model.Task;
-import java.util.*;
 
-public class InMemoryHistoryManager implements HistoryManager  {
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public class InMemoryHistoryManager implements HistoryManager {
     private final Map<Integer, Node> listHystoryById = new HashMap<>();
     public Node<Task> first;
     public Node<Task> last;
@@ -25,7 +29,7 @@ public class InMemoryHistoryManager implements HistoryManager  {
         final Node<Task> newNode = new Node<>(oldLast, task, null);
         listHystoryById.put(task.getId(), newNode);
         last = newNode;
-        if (oldLast == null){
+        if (oldLast == null) {
             first = newNode;
         } else {
             oldLast.next = newNode;
@@ -58,7 +62,7 @@ public class InMemoryHistoryManager implements HistoryManager  {
     }
 
     @Override
-    public void removeNode(int id){
+    public void removeNode(int id) {
         if (listHystoryById.containsKey(id)) {
             nodeRemove(listHystoryById.get(id));
             listHystoryById.remove(id);

@@ -1,8 +1,10 @@
 package com.yandex.kanban.model;
 
 import org.junit.jupiter.api.Test;
+
 import java.util.Objects;
-import static org.junit.jupiter.api.Assertions.*;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class TaskTest {
 
@@ -12,7 +14,7 @@ class TaskTest {
         Task task2 = new Task(StatusTask.NEW, "сделать обычную задачу №1", "обычная задача №1");
         task1.setId(1);
         task2.setId(1);
-        assertEquals(task2,task1);
+        assertEquals(task2, task1);
     }
 
     @Test

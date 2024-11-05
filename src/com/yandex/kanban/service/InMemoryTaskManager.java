@@ -4,6 +4,7 @@ import com.yandex.kanban.model.EpicTask;
 import com.yandex.kanban.model.StatusTask;
 import com.yandex.kanban.model.Subtask;
 import com.yandex.kanban.model.Task;
+
 import java.util.*;
 
 public class InMemoryTaskManager implements TaskManager {
@@ -41,7 +42,7 @@ public class InMemoryTaskManager implements TaskManager {
 
     @Override
     public Task getTask(Integer id) {
-       Task task = tasks.get(id);
+        Task task = tasks.get(id);
         historyManager.add(task);
         return task;
     }
@@ -101,7 +102,9 @@ public class InMemoryTaskManager implements TaskManager {
     }
 
     @Override
-    public List<Task> getListSubtask() { return new ArrayList<>(subtasks.values()); }
+    public List<Task> getListSubtask() {
+        return new ArrayList<>(subtasks.values());
+    }
 
     @Override
     public void clearSubtasks() {
@@ -115,9 +118,9 @@ public class InMemoryTaskManager implements TaskManager {
 
     @Override
     public void removeSubtask(Integer id) {
-       int foundEpicId =  subtasks.remove(id).getEpicId();
-       epics.get(foundEpicId).getSubTaskIds().remove(id);
-       updateStatus(foundEpicId);
+        int foundEpicId = subtasks.remove(id).getEpicId();
+        epics.get(foundEpicId).getSubTaskIds().remove(id);
+        updateStatus(foundEpicId);
     }
 
     @Override

@@ -5,9 +5,12 @@ import com.yandex.kanban.model.StatusTask;
 import com.yandex.kanban.model.Subtask;
 import com.yandex.kanban.model.Task;
 import org.junit.jupiter.api.Test;
+
 import java.util.ArrayList;
 import java.util.List;
-import static org.junit.jupiter.api.Assertions.*;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class InMemoryTaskManagerTest {
 
@@ -113,7 +116,7 @@ class InMemoryTaskManagerTest {
         Task task2 = new Task(StatusTask.NEW, "сделать обычную задачу №1", "обычная задача №1");
         task2.setId(1);
         taskManager.addTask(task1);
-        assertEquals(task2,task1);
+        assertEquals(task2, task1);
     }
 
     @Test

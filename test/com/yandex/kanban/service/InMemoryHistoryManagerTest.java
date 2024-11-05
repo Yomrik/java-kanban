@@ -3,9 +3,11 @@ package com.yandex.kanban.service;
 import com.yandex.kanban.model.StatusTask;
 import com.yandex.kanban.model.Task;
 import org.junit.jupiter.api.Test;
+
 import java.util.ArrayList;
 import java.util.List;
-import static org.junit.jupiter.api.Assertions.*;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class InMemoryHistoryManagerTest {
 
@@ -36,6 +38,7 @@ class InMemoryHistoryManagerTest {
 
         assertEquals(2, historyManager.getHistory().size());
     }
+
     @Test
     void orderAdditionListHystoryTest() {
         Task task1 = new Task(StatusTask.NEW, "сделать обычную задачу №1", "обычная задача №1");
