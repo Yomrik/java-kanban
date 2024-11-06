@@ -58,6 +58,15 @@ class InMemoryHistoryManagerTest {
         taskList.add(task3);
 
         assertEquals(taskList, historyManager.getHistory());
+    }
 
+    @Test
+    void removeTaskAndRemoveTaskHystoryTest() {
+        Task task1 = new Task(StatusTask.NEW, "сделать обычную задачу №1", "обычная задача №1");
+        task1.setId(1);
+        historyManager.add(task1);
+        historyManager.remove(1);
+
+        assertEquals(new ArrayList<>(), historyManager.getHistory());
     }
 }

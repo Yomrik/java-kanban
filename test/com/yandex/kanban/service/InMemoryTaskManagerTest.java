@@ -14,6 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class InMemoryTaskManagerTest {
 
+    HistoryManager historyManager = Managers.getDefaultHistory();
     TaskManager taskManager = Managers.getDefault();
 
     @Test
@@ -137,5 +138,39 @@ class InMemoryTaskManagerTest {
         Subtask subtask2 = new Subtask(StatusTask.NEW, "сделать маленькую задачу №1.1", "маленькая задача №1.1", epic1.getId());
         subtask2.setId(2);
         assertEquals(subtask2, subtask1);
+    }
+
+    @Test
+    void removeEpicAndRemoveSubtasksHystoryTest() {
+        EpicTask epic1 = new EpicTask("Сделать БОЛЬШУЮ задачу №1", "БОЛЬШАЯ ЗАДАЧА №1");
+        epic1.setId(1);
+        Subtask subtask1 = new Subtask(StatusTask.NEW, "сделать маленькую задачу №1.1", "маленькая задача №1.1", epic1.getId());
+        subtask1.setId(2);
+        Subtask subtask2 = new Subtask(StatusTask.NEW, "сделать маленькую задачу №1.2", "маленькая задача №1.2", epic1.getId());
+        subtask2.setId(3);
+
+        taskManager.addEpic(epic1);
+        taskManager.addSubtask(subtask1);
+        taskManager.addSubtask(subtask2);
+        taskManager.removeEpic(1);
+
+        assertEquals(0, historyManager.getHistory().size());
+    }
+
+    @Test
+    void clearEpicsTest() {
+        EpicTask epic1 = new EpicTask("Сделать БОЛЬШУЮ задачу №1", "БОЛЬШАЯ ЗАДАЧА №1");
+        epic1.setId(1);
+        Subtask subtask1 = new Subtask(StatusTask.NEW, "сделать маленькую задачу №1.1", "маленькая задача №1.1", epic1.getId());
+        subtask1.setId(2);
+        Subtask subtask2 = new Subtask(StatusTask.NEW, "сделать маленькую задачу №1.2", "маленькая задача №1.2", epic1.getId());
+        subtask2.setId(3);
+
+        taskManager.addEpic(epic1);
+        taskManager.addSubtask(subtask1);
+        taskManager.addSubtask(subtask2);
+        taskManager.clearEpics();
+
+        assertEquals(0, historyManager.getHistory().size());
     }
 }
