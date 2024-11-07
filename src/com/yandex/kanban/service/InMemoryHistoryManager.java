@@ -2,10 +2,7 @@ package com.yandex.kanban.service;
 
 import com.yandex.kanban.model.Task;
 
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class InMemoryHistoryManager implements HistoryManager {
     private final Map<Integer, Node> listHystoryById = new HashMap<>();
@@ -25,8 +22,7 @@ public class InMemoryHistoryManager implements HistoryManager {
     @Override
     public void remove(int id) {
         if (listHystoryById.containsKey(id)) {
-            nodeRemove(listHystoryById.get(id));
-            listHystoryById.remove(id);
+            removeNode(listHystoryById.remove(id));
         }
     }
 
@@ -36,9 +32,9 @@ public class InMemoryHistoryManager implements HistoryManager {
     }
 
     @Override
-    public void clearHystory(List listId) {
+    public void clearHystory(Collection<Integer> listId) {
         for (Object id : listId) {
-            nodeRemove(listHystoryById.get(id));
+            removeNode(listHystoryById.get(id));
             listHystoryById.remove(id);
         }
     }
@@ -56,15 +52,14 @@ public class InMemoryHistoryManager implements HistoryManager {
     }
 
     private void linkLast(Task task) {
-        final Node<Task> oldLast = last;
-        final Node<Task> newNode = new Node<>(oldLast, task, null);
+        final Node<Task> newNode = new Node<>(last, task, null);
         listHystoryById.put(task.getId(), newNode);
-        last = newNode;
-        if (oldLast == null) {
+        if (last == null) {
             first = newNode;
         } else {
-            oldLast.next = newNode;
+            last.next = newNode;
         }
+        last = newNode;
     }
 
     private List<Task> getTasks() {
@@ -77,17 +72,19 @@ public class InMemoryHistoryManager implements HistoryManager {
         return listHistory;
     }
 
-    private void nodeRemove(Node node) {
-        if (node == first && node == last) {
-            first = null;
-            last = null;
-        } else if (node == first) {
-            first = node.next;
-        } else if (node == last) {
-            last = node.prev;
-        } else {
-            node.prev.next = node.next;
-            node.next.prev = node.prev;
+    private void removeNode(Node node) {
+        if (node != null) {
+            if (node == first && node == last) {
+                first = null;
+                last = null;
+            } else if (node == first) {
+                first = node.next;
+            } else if (node == last) {
+                last = node.prev;
+            } else {
+                node.prev.next = node.next;
+                node.next.prev = node.prev;
+            }
         }
     }
 }
