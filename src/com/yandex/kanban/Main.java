@@ -4,14 +4,15 @@ import com.yandex.kanban.model.EpicTask;
 import com.yandex.kanban.model.StatusTask;
 import com.yandex.kanban.model.Subtask;
 import com.yandex.kanban.model.Task;
-import com.yandex.kanban.service.*;
+import com.yandex.kanban.service.Managers;
+import com.yandex.kanban.service.TaskManager;
 
 public class Main {
 
     public static void main(String[] args) {
         TaskManager taskManager = Managers.getDefault();
 
-          //Добавляем задачи
+        //Добавляем задачи
 
         Task task1 = new Task(StatusTask.NEW, "сделать обычную задачу №1", "обычная задача №1");
         taskManager.addTask(task1);
@@ -28,72 +29,87 @@ public class Main {
         Subtask subtask3 = new Subtask(StatusTask.NEW, "сделать маленькую задачу №2.1", "маленькая задача №2.1", epic2.getId());
         taskManager.addSubtask(subtask3);
 
-                                                       //Выводим списки задач
+        //Выводим списки задач
 
-        for(Task item : taskManager.getListTask()) {
+        System.out.println("");
+        System.out.println("Выводим списки задач");
+        System.out.println("");
+
+
+        for (Task item : taskManager.getListTask()) {
             System.out.println(item);
         }
         System.out.println("");
 
-        for(Task item : taskManager.getListEpic()) {
+        for (Task item : taskManager.getListEpic()) {
             System.out.println(item);
         }
         System.out.println("");
 
-        for(Task item : taskManager.getListSubtask()) {
+        for (Task item : taskManager.getListSubtask()) {
             System.out.println(item);
         }
         System.out.println("");
         System.out.println("---------------");
         System.out.println("");
-
-                                                       // обновляем подзадачу
+        // обновляем подзадачу
 
         Subtask subtask4 = new Subtask(StatusTask.DONE, "Заменить подзадачу №1", "Задача на замену", epic1.getId());
         subtask4.setId(subtask1.getId());
         taskManager.updateSubtask(subtask4);
 
-                                                      //Выводим обновленные списки задач
+        System.out.println("");
+        System.out.println("Выводим обновленные списки задач");
+        System.out.println("");
+        //Выводим обновленные списки задач
 
-        for(Task item : taskManager.getListEpic()) {
+        for (Task item : taskManager.getListEpic()) {
             System.out.println(item);
         }
         System.out.println("");
 
-        for(Task item : taskManager.getListSubtask()) {
+        for (Task item : taskManager.getListSubtask()) {
             System.out.println(item);
         }
         System.out.println("");
         System.out.println("---------------");
         System.out.println("");
 
-                                                     //Удаляем одну простую задачу и эпик
+        //Удаляем одну простую задачу и эпик
 
         taskManager.removeTask(1);
         taskManager.removeEpic(6);
+        //Выводим обновленные списки задач
 
-                                                     //Выводим обновленные списки задач
+        System.out.println("");
+        System.out.println("Выводим обновленные списки задач");
+        System.out.println("");
 
-        for(Task item : taskManager.getListTask()) {
+        for (Task item : taskManager.getListTask()) {
             System.out.println(item);
         }
         System.out.println("");
 
-        for(Task item : taskManager.getListEpic()) {
+        for (Task item : taskManager.getListEpic()) {
             System.out.println(item);
         }
         System.out.println("");
 
-        for(Task item : taskManager.getListSubtask()) {
+        for (Task item : taskManager.getListSubtask()) {
             System.out.println(item);
         }
         System.out.println("");
         System.out.println("---------------");
         System.out.println("");
 
-                                                     //Добавляем просмотренные задачи в список истории
+        //Добавляем просмотренные задачи в список истории
+
+        System.out.println("");
+        System.out.println("Выводим историю");
+        System.out.println("");
 
         taskManager.getTask(2);
+        taskManager.getSubtask(5);
         taskManager.getTask(2);
         taskManager.getEpic(3);
         taskManager.getSubtask(4);
@@ -106,13 +122,22 @@ public class Main {
         taskManager.getEpic(3);
         taskManager.getSubtask(10);
 
+
+
         /*
         Проверяем, что количество задач не превышает 10, новые задачи
         добавляются в начало списка, а самые старые удаляются
         */
 
-        for(Task item : taskManager.getListHystory()) {
+        for (Task item : taskManager.getListHystory()) {
             System.out.println(item);
         }
+
+
+        System.out.println("");
+        System.out.println("---------------");
+        System.out.println("");
+
+
     }
 }
