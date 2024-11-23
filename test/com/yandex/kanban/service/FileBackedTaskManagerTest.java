@@ -5,6 +5,7 @@ import com.yandex.kanban.model.Task;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.file.Files;
@@ -28,13 +29,23 @@ class FileBackedTaskManagerTest {
         writer.close();
 
         assertEquals(Files.readString(Path.of("data.txt")), Files.readString(Path.of(file.getPath())));
+
+        File file1 = new File("data.txt");
+        PrintWriter writer1 = new PrintWriter(file1);
+        writer1.println("");
+        writer1.close();
+        data.setNextId(1);
     }
 
     @Test
-    void fromStringTest() {
+    void fromStringTest() throws FileNotFoundException {
         Task task4 = new Task(StatusTask.NEW, "сделать обычную задачу №1", "обычная задача №1");
         Task task = FileBackedTaskManager.fromString("0,TASK,обычная задача №1,сделать обычную задачу №1,NEW");
         assertEquals(task4, task);
+        File file1 = new File("data.txt");
+        PrintWriter writer1 = new PrintWriter(file1);
+        writer1.println("");
+        writer1.close();
     }
 
     @Test
@@ -54,6 +65,7 @@ class FileBackedTaskManagerTest {
         String line1 = line.replace("[", "");
 
         assertEquals("1,TASK,обычная задача №1,сделать обычную задачу №1,NEW", line1);
+
 
     }
 }
