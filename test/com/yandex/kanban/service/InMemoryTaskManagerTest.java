@@ -16,6 +16,7 @@ class InMemoryTaskManagerTest {
 
     @Test
     void addTask() {
+        TaskManager taskManager = Managers.getDefault();
         List<Task> tasks = new ArrayList<>();
         Task task1 = new Task(StatusTask.NEW, "сделать обычную задачу №1", "обычная задача №1");
         taskManager.addTask(task1);
@@ -28,6 +29,7 @@ class InMemoryTaskManagerTest {
 
     @Test
     void getTask() {
+        TaskManager taskManager = Managers.getDefault();
         Task task1 = new Task(StatusTask.NEW, "сделать обычную задачу №1", "обычная задача №1");
         taskManager.addTask(task1);
         assertEquals(task1, taskManager.getTask(task1.getId()));
@@ -35,6 +37,7 @@ class InMemoryTaskManagerTest {
 
     @Test
     void addEpic() {
+        TaskManager taskManager = Managers.getDefault();
         List<Task> epicTasks = new ArrayList<>();
         EpicTask epic1 = new EpicTask("Сделать БОЛЬШУЮ задачу №1", "БОЛЬШАЯ ЗАДАЧА №1");
         taskManager.addEpic(epic1);
@@ -47,6 +50,7 @@ class InMemoryTaskManagerTest {
 
     @Test
     void getEpic() {
+        TaskManager taskManager = Managers.getDefault();
         EpicTask epic1 = new EpicTask("Сделать БОЛЬШУЮ задачу №1", "БОЛЬШАЯ ЗАДАЧА №1");
         taskManager.addEpic(epic1);
         assertEquals(epic1, taskManager.getEpic(epic1.getId()));
@@ -54,6 +58,7 @@ class InMemoryTaskManagerTest {
 
     @Test
     void addSubtask() {
+        TaskManager taskManager = Managers.getDefault();
         List<Subtask> subtasks = new ArrayList<>();
         EpicTask epic1 = new EpicTask("Сделать БОЛЬШУЮ задачу №1", "БОЛЬШАЯ ЗАДАЧА №1");
         taskManager.addEpic(epic1);
@@ -68,6 +73,7 @@ class InMemoryTaskManagerTest {
 
     @Test
     void getSubtask() {
+        TaskManager taskManager = Managers.getDefault();
         EpicTask epic1 = new EpicTask("Сделать БОЛЬШУЮ задачу №1", "БОЛЬШАЯ ЗАДАЧА №1");
         taskManager.addEpic(epic1);
         Subtask subtask1 = new Subtask(StatusTask.NEW, "сделать маленькую задачу №1.1", "маленькая задача №1.1", epic1.getId());
@@ -77,6 +83,7 @@ class InMemoryTaskManagerTest {
 
     @Test
     void statusOfEpic() {
+        TaskManager taskManager = Managers.getDefault();
         EpicTask epic1 = new EpicTask("Сделать БОЛЬШУЮ задачу №1", "БОЛЬШАЯ ЗАДАЧА №1");
         taskManager.addEpic(epic1);
         Subtask subtask1 = new Subtask(StatusTask.NEW, "сделать маленькую задачу №1.1", "маленькая задача №1.1", epic1.getId());
@@ -89,6 +96,7 @@ class InMemoryTaskManagerTest {
 
     @Test
     void taskInListHistory() {
+        TaskManager taskManager = Managers.getDefault();
         List<Task> hystory = new ArrayList<>();
         Task task1 = new Task(StatusTask.NEW, "сделать обычную задачу №1", "обычная задача №1");
         taskManager.addTask(task1);
@@ -99,6 +107,7 @@ class InMemoryTaskManagerTest {
 
     @Test
     void removeEpicRemoveSubtasks() {
+        TaskManager taskManager = Managers.getDefault();
         EpicTask epic1 = new EpicTask("Сделать БОЛЬШУЮ задачу №1", "БОЛЬШАЯ ЗАДАЧА №1");
         taskManager.addEpic(epic1);
         Subtask subtask1 = new Subtask(StatusTask.NEW, "сделать маленькую задачу №1.1", "маленькая задача №1.1", epic1.getId());
@@ -113,6 +122,7 @@ class InMemoryTaskManagerTest {
 
     @Test
     void taskEqualTaskById() {
+        TaskManager taskManager = Managers.getDefault();
         Task task1 = new Task(StatusTask.NEW, "сделать обычную задачу №1", "обычная задача №1");
         Task task2 = new Task(StatusTask.NEW, "сделать обычную задачу №1", "обычная задача №1");
         task2.setId(1);
@@ -122,6 +132,7 @@ class InMemoryTaskManagerTest {
 
     @Test
     void EpictaskEqualEpictaskById() {
+        TaskManager taskManager = Managers.getDefault();
         EpicTask epic1 = new EpicTask("Сделать БОЛЬШУЮ задачу №1", "БОЛЬШАЯ ЗАДАЧА №1");
         EpicTask epic2 = new EpicTask("Сделать БОЛЬШУЮ задачу №1", "БОЛЬШАЯ ЗАДАЧА №1");
         epic2.setId(1);
@@ -132,6 +143,7 @@ class InMemoryTaskManagerTest {
 
     @Test
     void SubtaskEqualSubtaskById() {
+        TaskManager taskManager = Managers.getDefault();
         EpicTask epic1 = new EpicTask("Сделать БОЛЬШУЮ задачу №1", "БОЛЬШАЯ ЗАДАЧА №1");
         taskManager.addEpic(epic1);
         Subtask subtask1 = new Subtask(StatusTask.NEW, "сделать маленькую задачу №1.1", "маленькая задача №1.1", epic1.getId());
@@ -144,6 +156,8 @@ class InMemoryTaskManagerTest {
 
     @Test
     void removeEpicAndRemoveSubtasksHystoryTest() {
+        HistoryManager historyManager = Managers.getDefaultHistory();
+        TaskManager taskManager = Managers.getDefault();
         EpicTask epic1 = new EpicTask("Сделать БОЛЬШУЮ задачу №1", "БОЛЬШАЯ ЗАДАЧА №1");
         epic1.setId(1);
         epic1.setType(TypeTask.EPICTASK);
@@ -164,6 +178,8 @@ class InMemoryTaskManagerTest {
 
     @Test
     void clearEpicsTest() {
+        TaskManager taskManager = Managers.getDefault();
+        HistoryManager historyManager = Managers.getDefaultHistory();
         EpicTask epic1 = new EpicTask("Сделать БОЛЬШУЮ задачу №1", "БОЛЬШАЯ ЗАДАЧА №1");
         epic1.setId(1);
         epic1.setType(TypeTask.EPICTASK);

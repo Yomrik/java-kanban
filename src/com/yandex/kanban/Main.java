@@ -11,9 +11,10 @@ import java.io.File;
 public class Main {
 
     public static void main(String[] args) {
-        FileBackedTaskManager.loadFromFile(new File("data.txt"));
-       // TaskManager taskManager = Managers.getDefault();
         FileBackedTaskManager data = new FileBackedTaskManager();
+        data.loadFromFile(new File("data.txt"));
+       // TaskManager taskManager = Managers.getDefault();
+
 //
 //      //  Добавляем задачи
 //

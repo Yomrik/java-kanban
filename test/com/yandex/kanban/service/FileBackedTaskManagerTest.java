@@ -39,8 +39,9 @@ class FileBackedTaskManagerTest {
 
     @Test
     void fromStringTest() throws FileNotFoundException {
+        FileBackedTaskManager data = new FileBackedTaskManager();
         Task task4 = new Task(StatusTask.NEW, "сделать обычную задачу №1", "обычная задача №1");
-        Task task = FileBackedTaskManager.fromString("0,TASK,обычная задача №1,сделать обычную задачу №1,NEW");
+        Task task = data.fromString("0,TASK,обычная задача №1,сделать обычную задачу №1,NEW");
         assertEquals(task4, task);
         File file1 = new File("data.txt");
         PrintWriter writer1 = new PrintWriter(file1);
@@ -59,12 +60,13 @@ class FileBackedTaskManagerTest {
         writer.println("1,TASK,обычная задача №1,сделать обычную задачу №1,NEW");
         writer.close();
 
-        FileBackedTaskManager.loadFromFile(file);
+        data.loadFromFile(file);
 
         String line = data.getTasks().values().toString().replace("]", "");
         String line1 = line.replace("[", "");
+        String exp = "1,TASK,обычная задача №1,сделать обычную задачу №1,NEW";
 
-        assertEquals("1,TASK,обычная задача №1,сделать обычную задачу №1,NEW", line1);
+        assertEquals(exp , line1);
 
 
     }

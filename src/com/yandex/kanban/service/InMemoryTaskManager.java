@@ -6,10 +6,10 @@ import java.util.*;
 
 public class InMemoryTaskManager implements TaskManager {
     private final HistoryManager historyManager = Managers.getDefaultHistory();
-    protected static Map<Integer, Task> tasks = new HashMap<>();
-    protected static Map<Integer, EpicTask> epics = new HashMap<>();
-    protected static Map<Integer, Subtask> subtasks = new HashMap<>();
-    protected static int nextId = 1;
+    private final Map<Integer, Task> tasks = new HashMap<>();
+    private final Map<Integer, EpicTask> epics = new HashMap<>();
+    private final Map<Integer, Subtask> subtasks = new HashMap<>();
+    private int nextId = 1;
 
     @Override
     public void addTask(Task task) {
@@ -217,18 +217,6 @@ public class InMemoryTaskManager implements TaskManager {
 
     public Map<Integer, Subtask> getSubtasks() {
         return subtasks;
-    }
-
-    public void setTasks(Map<Integer, Task> tasks) {
-        this.tasks = tasks;
-    }
-
-    public void setEpics(Map<Integer, EpicTask> epics) {
-        this.epics = epics;
-    }
-
-    public void setSubtasks(Map<Integer, Subtask> subtasks) {
-        this.subtasks = subtasks;
     }
 
     public void setNextId(int nextId) {

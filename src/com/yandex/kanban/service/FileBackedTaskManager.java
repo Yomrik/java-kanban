@@ -2,8 +2,15 @@ package com.yandex.kanban.service;
 
 import com.yandex.kanban.model.*;
 import java.io.*;
+import java.util.HashMap;
+import java.util.Map;
 
 public class FileBackedTaskManager extends InMemoryTaskManager {
+
+    protected Map<Integer, Task> tasks = new HashMap<>();
+    protected Map<Integer, EpicTask> epics = new HashMap<>();
+    protected Map<Integer, Subtask> subtasks = new HashMap<>();
+    protected int nextId = 1;
 
     public void save() {
         File file = new File("data.txt");
@@ -30,7 +37,7 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
         }
     }
 
-    public static Task fromString(String value) {
+    public Task fromString(String value) {
       try {
           String[] taskLine = value.split(",");
           if (taskLine[1].equals("TASK")) {
@@ -57,7 +64,7 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
         return null;
     }
 
-    public static void loadFromFile(File file) {
+    public void loadFromFile(File file) {
         int countId = 1;
         try {
             FileReader reader = new FileReader(file);
@@ -81,6 +88,7 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
                 countId++;
             }
             nextId = countId;
+
             br.close();
 
         } catch (IOException e) {
