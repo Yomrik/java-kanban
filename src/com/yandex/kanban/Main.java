@@ -14,11 +14,11 @@ public class Main {
 
     public static void main(String[] args) {
         FileBackedTaskManager.loadFromFile(new File("data.txt"));
-        TaskManager taskManager = Managers.getDefault();
+       // TaskManager taskManager = Managers.getDefault();
         FileBackedTaskManager data = new FileBackedTaskManager();
-
-        //Добавляем задачи
-
+//
+//      //  Добавляем задачи
+//
 //        Task task1 = new Task(StatusTask.NEW, "сделать обычную задачу №1", "обычная задача №1");
 //        taskManager.addTask(task1);
 //        Task task2 = new Task(StatusTask.NEW, "сделать обычную задачу №2", "обычная задача №2");
@@ -139,7 +139,7 @@ public class Main {
 //        for (Task item : taskManager.getListHystory()) {
 //            System.out.println(item);
 //        }
-//
+
 
         System.out.println("");
         System.out.println("---------------");
