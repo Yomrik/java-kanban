@@ -5,8 +5,6 @@ import com.yandex.kanban.model.StatusTask;
 import com.yandex.kanban.model.Subtask;
 import com.yandex.kanban.model.Task;
 import com.yandex.kanban.service.FileBackedTaskManager;
-import com.yandex.kanban.service.Managers;
-import com.yandex.kanban.service.TaskManager;
 
 import java.io.File;
 
