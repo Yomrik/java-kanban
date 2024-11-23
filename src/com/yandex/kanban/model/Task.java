@@ -7,6 +7,7 @@ public class Task {
     private String description;
     private int id;
     private StatusTask status;
+    private TypeTask type;
 
     public Task(StatusTask status, String description, String name) {
         this.status = status;
@@ -16,12 +17,7 @@ public class Task {
 
     @Override
     public String toString() {
-        return "com.yandex.kanban.model.Task{" +
-                "name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", id=" + id +
-                ", status=" + status +
-                '}';
+        return id + "," + type + "," + name + "," + description + "," + status;
     }
 
     public int getId() {
@@ -56,6 +52,14 @@ public class Task {
         this.status = status;
     }
 
+    public TypeTask getType() {
+        return type;
+    }
+
+    public void setType(TypeTask type) {
+        this.type = type;
+    }
+
     @Override
     public boolean equals(Object object) {
         if (this == object) return true;
@@ -68,4 +72,6 @@ public class Task {
     public int hashCode() {
         return Objects.hash(name, description, id, status);
     }
+
+
 }

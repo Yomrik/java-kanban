@@ -1,28 +1,27 @@
 package com.yandex.kanban.service;
 
-import com.yandex.kanban.model.EpicTask;
-import com.yandex.kanban.model.StatusTask;
-import com.yandex.kanban.model.Subtask;
-import com.yandex.kanban.model.Task;
+import com.yandex.kanban.model.*;
 
 import java.util.*;
 
 public class InMemoryTaskManager implements TaskManager {
     private final HistoryManager historyManager = Managers.getDefaultHistory();
-    private final Map<Integer, Task> tasks = new HashMap<>();
-    private final Map<Integer, EpicTask> epics = new HashMap<>();
-    private final Map<Integer, Subtask> subtasks = new HashMap<>();
-    private int nextId = 1;
+    protected static Map<Integer, Task> tasks = new HashMap<>();
+    protected static Map<Integer, EpicTask> epics = new HashMap<>();
+    protected static Map<Integer, Subtask> subtasks = new HashMap<>();
+    protected static int nextId = 1;
 
     @Override
     public void addTask(Task task) {
         task.setId(nextId++);
         tasks.put(task.getId(), task);
+        task.setType(TypeTask.TASK);
     }
 
     @Override
     public void updateTask(Task task) {
         tasks.put(task.getId(), task);
+        task.setType(TypeTask.TASK);
     }
 
     @Override
@@ -53,6 +52,7 @@ public class InMemoryTaskManager implements TaskManager {
     public void addEpic(EpicTask epicTask) {
         epicTask.setId(nextId++);
         epics.put(epicTask.getId(), epicTask);
+        epicTask.setType(TypeTask.EPICTASK);
     }
 
     @Override
@@ -60,6 +60,7 @@ public class InMemoryTaskManager implements TaskManager {
         final EpicTask oldEpic = epics.get(epicTask.getId());
         oldEpic.setName(epicTask.getName());
         oldEpic.setDescription(epicTask.getDescription());
+        epicTask.setType(TypeTask.EPICTASK);
     }
 
     @Override
@@ -99,12 +100,14 @@ public class InMemoryTaskManager implements TaskManager {
         EpicTask epic = epics.get(subtask.getEpicId());
         epic.getSubTaskIds().add(subtask.getId());
         updateStatus(epic.getId());
+        subtask.setType(TypeTask.SUBTASK);
     }
 
     @Override
     public void updateSubtask(Subtask subtask) {
         subtasks.put(subtask.getId(), subtask);
         updateStatus(subtask.getEpicId());
+        subtask.setType(TypeTask.SUBTASK);
     }
 
     @Override
@@ -201,5 +204,38 @@ public class InMemoryTaskManager implements TaskManager {
     @Override
     public int hashCode() {
         return Objects.hash(tasks, epics, subtasks, nextId);
+    }
+
+
+    public Map<Integer, Task> getTasks() {
+        return tasks;
+    }
+
+    public Map<Integer, EpicTask> getEpics() {
+        return epics;
+    }
+
+    public Map<Integer, Subtask> getSubtasks() {
+        return subtasks;
+    }
+
+    public void setTasks(Map<Integer, Task> tasks) {
+        this.tasks = tasks;
+    }
+
+    public void setEpics(Map<Integer, EpicTask> epics) {
+        this.epics = epics;
+    }
+
+    public void setSubtasks(Map<Integer, Subtask> subtasks) {
+        this.subtasks = subtasks;
+    }
+
+    public void setNextId(int nextId) {
+        this.nextId = nextId;
+    }
+
+    public int getNextId() {
+        return nextId;
     }
 }
