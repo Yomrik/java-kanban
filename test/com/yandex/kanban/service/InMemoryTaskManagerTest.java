@@ -1,9 +1,6 @@
 package com.yandex.kanban.service;
 
-import com.yandex.kanban.model.EpicTask;
-import com.yandex.kanban.model.StatusTask;
-import com.yandex.kanban.model.Subtask;
-import com.yandex.kanban.model.Task;
+import com.yandex.kanban.model.*;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -24,6 +21,7 @@ class InMemoryTaskManagerTest {
         taskManager.addTask(task1);
         Task task2 = new Task(StatusTask.NEW, "сделать обычную задачу №1", "обычная задача №1");
         task2.setId(1);
+        task2.setType(TypeTask.TASK);
         tasks.add(task2);
         assertEquals(tasks, taskManager.getListTask());
     }
@@ -42,6 +40,7 @@ class InMemoryTaskManagerTest {
         taskManager.addEpic(epic1);
         EpicTask epic2 = new EpicTask("Сделать БОЛЬШУЮ задачу №1", "БОЛЬШАЯ ЗАДАЧА №1");
         epic2.setId(1);
+        epic2.setType(TypeTask.EPICTASK);
         epicTasks.add(epic2);
         assertEquals(epicTasks, taskManager.getListEpic());
     }
@@ -62,6 +61,7 @@ class InMemoryTaskManagerTest {
         taskManager.addSubtask(subtask1);
         Subtask subtask2 = new Subtask(StatusTask.NEW, "сделать маленькую задачу №1.1", "маленькая задача №1.1", epic1.getId());
         subtask2.setId(2);
+        subtask2.setType(TypeTask.SUBTASK);
         subtasks.add(subtask2);
         assertEquals(subtasks, taskManager.getListSubtask());
     }
@@ -125,6 +125,7 @@ class InMemoryTaskManagerTest {
         EpicTask epic1 = new EpicTask("Сделать БОЛЬШУЮ задачу №1", "БОЛЬШАЯ ЗАДАЧА №1");
         EpicTask epic2 = new EpicTask("Сделать БОЛЬШУЮ задачу №1", "БОЛЬШАЯ ЗАДАЧА №1");
         epic2.setId(1);
+        epic2.setType(TypeTask.EPICTASK);
         taskManager.addEpic(epic1);
         assertEquals(epic2, epic1);
     }
@@ -137,6 +138,7 @@ class InMemoryTaskManagerTest {
         taskManager.addSubtask(subtask1);
         Subtask subtask2 = new Subtask(StatusTask.NEW, "сделать маленькую задачу №1.1", "маленькая задача №1.1", epic1.getId());
         subtask2.setId(2);
+        subtask2.setType(TypeTask.SUBTASK);
         assertEquals(subtask2, subtask1);
     }
 
@@ -144,10 +146,13 @@ class InMemoryTaskManagerTest {
     void removeEpicAndRemoveSubtasksHystoryTest() {
         EpicTask epic1 = new EpicTask("Сделать БОЛЬШУЮ задачу №1", "БОЛЬШАЯ ЗАДАЧА №1");
         epic1.setId(1);
+        epic1.setType(TypeTask.EPICTASK);
         Subtask subtask1 = new Subtask(StatusTask.NEW, "сделать маленькую задачу №1.1", "маленькая задача №1.1", epic1.getId());
         subtask1.setId(2);
+        subtask1.setType(TypeTask.SUBTASK);
         Subtask subtask2 = new Subtask(StatusTask.NEW, "сделать маленькую задачу №1.2", "маленькая задача №1.2", epic1.getId());
         subtask2.setId(3);
+        subtask2.setType(TypeTask.SUBTASK);
 
         taskManager.addEpic(epic1);
         taskManager.addSubtask(subtask1);
@@ -161,10 +166,13 @@ class InMemoryTaskManagerTest {
     void clearEpicsTest() {
         EpicTask epic1 = new EpicTask("Сделать БОЛЬШУЮ задачу №1", "БОЛЬШАЯ ЗАДАЧА №1");
         epic1.setId(1);
+        epic1.setType(TypeTask.EPICTASK);
         Subtask subtask1 = new Subtask(StatusTask.NEW, "сделать маленькую задачу №1.1", "маленькая задача №1.1", epic1.getId());
         subtask1.setId(2);
+        subtask1.setType(TypeTask.SUBTASK);
         Subtask subtask2 = new Subtask(StatusTask.NEW, "сделать маленькую задачу №1.2", "маленькая задача №1.2", epic1.getId());
         subtask2.setId(3);
+        subtask2.setType(TypeTask.SUBTASK);
 
         taskManager.addEpic(epic1);
         taskManager.addSubtask(subtask1);
