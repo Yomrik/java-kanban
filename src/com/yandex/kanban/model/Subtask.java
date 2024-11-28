@@ -3,15 +3,22 @@ package com.yandex.kanban.model;
 import java.util.Objects;
 
 public class Subtask extends Task {
-    private final int epicId;
+    private int epicId;
+    private TypeTask type;
 
-    public Subtask(StatusTask status, String description, String name, int epicId) {
-        super(status, description, name);
+    public Subtask(StatusTask status, String description, String name, int epicId, TypeTask type) {
+        super(status, description, name, TypeTask.SUBTASK);
         this.epicId = epicId;
+        this.type = type;
+
     }
 
     public int getEpicId() {
         return epicId;
+    }
+
+    public void setEpicId(int epicId) {
+        this.epicId = epicId;
     }
 
     @Override
@@ -27,5 +34,12 @@ public class Subtask extends Task {
     public int hashCode() {
         return Objects.hash(super.hashCode(), epicId);
     }
+
+    @Override
+    public String toString() {
+        return super.getId() + "," + super.getType() + "," + super.getName() + "," + super.getDescription()
+                + "," + super.getStatus() + "," + epicId;
+    }
+
 }
 

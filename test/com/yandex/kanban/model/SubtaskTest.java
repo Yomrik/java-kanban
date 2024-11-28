@@ -4,16 +4,19 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Objects;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class SubtaskTest {
 
     @Test
     void testEquals() {
-        EpicTask epic1 = new EpicTask("Сделать БОЛЬШУЮ задачу №1", "БОЛЬШАЯ ЗАДАЧА №1");
+        EpicTask epic1 = new EpicTask("Сделать БОЛЬШУЮ задачу №1", "БОЛЬШАЯ ЗАДАЧА №1",
+                TypeTask.EPICTASK);
         epic1.setId(1);
-        Subtask subtask1 = new Subtask(StatusTask.NEW, "сделать маленькую задачу №1.1", "маленькая задача №1.1", epic1.getId());
-        Subtask subtask2 = new Subtask(StatusTask.NEW, "сделать маленькую задачу №1.1", "маленькая задача №1.1", epic1.getId());
+        Subtask subtask1 = new Subtask(StatusTask.NEW, "сделать маленькую задачу №1.1",
+                "маленькая задача №1.1", epic1.getId(), TypeTask.SUBTASK);
+        Subtask subtask2 = new Subtask(StatusTask.NEW, "сделать маленькую задачу №1.1",
+                "маленькая задача №1.1", epic1.getId(), TypeTask.SUBTASK);
         subtask1.setId(2);
         subtask2.setId(2);
         assertEquals(subtask2, subtask1);
@@ -21,10 +24,13 @@ class SubtaskTest {
 
     @Test
     void testHashCode() {
-        EpicTask epic1 = new EpicTask("Сделать БОЛЬШУЮ задачу №1", "БОЛЬШАЯ ЗАДАЧА №1");
+        EpicTask epic1 = new EpicTask("Сделать БОЛЬШУЮ задачу №1", "БОЛЬШАЯ ЗАДАЧА №1",
+                TypeTask.EPICTASK);
         epic1.setId(1);
-        Subtask subtask1 = new Subtask(StatusTask.NEW, "сделать маленькую задачу №1.1", "маленькая задача №1.1", epic1.getId());
-        Subtask subtask2 = new Subtask(StatusTask.NEW, "сделать маленькую задачу №1.1", "маленькая задача №1.1", epic1.getId());
+        Subtask subtask1 = new Subtask(StatusTask.NEW, "сделать маленькую задачу №1.1",
+                "маленькая задача №1.1", epic1.getId(), TypeTask.SUBTASK);
+        Subtask subtask2 = new Subtask(StatusTask.NEW, "сделать маленькую задачу №1.1",
+                "маленькая задача №1.1", epic1.getId(), TypeTask.SUBTASK);
         subtask1.setId(2);
         subtask2.setId(2);
         assertEquals(Objects.hash(subtask2), Objects.hash(subtask1));

@@ -10,8 +10,8 @@ class EpicTaskTest {
 
     @Test
     void testEquals() {
-        EpicTask epic1 = new EpicTask("Сделать БОЛЬШУЮ задачу №1", "БОЛЬШАЯ ЗАДАЧА №1");
-        EpicTask epic2 = new EpicTask("Сделать БОЛЬШУЮ задачу №1", "БОЛЬШАЯ ЗАДАЧА №1");
+        EpicTask epic1 = new EpicTask("Сделать БОЛЬШУЮ задачу №1", "БОЛЬШАЯ ЗАДАЧА №1", TypeTask.EPICTASK);
+        EpicTask epic2 = new EpicTask("Сделать БОЛЬШУЮ задачу №1", "БОЛЬШАЯ ЗАДАЧА №1", TypeTask.EPICTASK);
         epic1.setId(1);
         epic2.setId(1);
         assertEquals(epic2, epic1);
@@ -19,8 +19,8 @@ class EpicTaskTest {
 
     @Test
     void testHashCode() {
-        EpicTask epic1 = new EpicTask("Сделать БОЛЬШУЮ задачу №1", "БОЛЬШАЯ ЗАДАЧА №1");
-        EpicTask epic2 = new EpicTask("Сделать БОЛЬШУЮ задачу №1", "БОЛЬШАЯ ЗАДАЧА №1");
+        EpicTask epic1 = new EpicTask("Сделать БОЛЬШУЮ задачу №1", "БОЛЬШАЯ ЗАДАЧА №1", TypeTask.EPICTASK);
+        EpicTask epic2 = new EpicTask("Сделать БОЛЬШУЮ задачу №1", "БОЛЬШАЯ ЗАДАЧА №1", TypeTask.EPICTASK);
         epic1.setId(1);
         epic2.setId(1);
         assertEquals(Objects.hash(epic2), Objects.hash(epic1));

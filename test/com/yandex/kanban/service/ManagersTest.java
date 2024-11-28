@@ -3,17 +3,19 @@ package com.yandex.kanban.service;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+
 class ManagersTest {
 
     @Test
     void getDefault() {
         TaskManager taskManager = Managers.getDefault();
-        Assertions.assertEquals(new InMemoryTaskManager(), taskManager);
+        Assertions.assertEquals(taskManager, new InMemoryTaskManager());
     }
 
     @Test
     void getDefaultHistory() {
         HistoryManager historyManager = Managers.getDefaultHistory();
-        Assertions.assertEquals(new InMemoryHistoryManager(), historyManager);
+        assertInstanceOf(InMemoryHistoryManager.class, historyManager);
     }
 }
