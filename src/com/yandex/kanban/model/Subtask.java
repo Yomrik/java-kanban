@@ -4,10 +4,13 @@ import java.util.Objects;
 
 public class Subtask extends Task {
     private int epicId;
+    private TypeTask type;
 
-    public Subtask(StatusTask status, String description, String name, int epicId) {
-        super(status, description, name);
+    public Subtask(StatusTask status, String description, String name, int epicId, TypeTask type) {
+        super(status, description, name, TypeTask.SUBTASK);
         this.epicId = epicId;
+        this.type = type;
+
     }
 
     public int getEpicId() {

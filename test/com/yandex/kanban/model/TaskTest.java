@@ -10,8 +10,8 @@ class TaskTest {
 
     @Test
     void testEquals() {
-        Task task1 = new Task(StatusTask.NEW, "сделать обычную задачу №1", "обычная задача №1");
-        Task task2 = new Task(StatusTask.NEW, "сделать обычную задачу №1", "обычная задача №1");
+        Task task1 = new Task(StatusTask.NEW, "сделать обычную задачу №1", "обычная задача №1", TypeTask.TASK);
+        Task task2 = new Task(StatusTask.NEW, "сделать обычную задачу №1", "обычная задача №1", TypeTask.TASK);
         task1.setId(1);
         task2.setId(1);
         assertEquals(task2, task1);
@@ -19,8 +19,8 @@ class TaskTest {
 
     @Test
     void testHashCode() {
-        Task task1 = new Task(StatusTask.NEW, "сделать обычную задачу №1", "обычная задача №1");
-        Task task2 = new Task(StatusTask.NEW, "сделать обычную задачу №1", "обычная задача №1");
+        Task task1 = new Task(StatusTask.NEW, "сделать обычную задачу №1", "обычная задача №1", TypeTask.TASK);
+        Task task2 = new Task(StatusTask.NEW, "сделать обычную задачу №1", "обычная задача №1", TypeTask.TASK);
         task1.setId(1);
         task2.setId(1);
         assertEquals(Objects.hash(task2), Objects.hash(task1));

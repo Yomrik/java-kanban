@@ -2,6 +2,7 @@ package com.yandex.kanban.service;
 
 import com.yandex.kanban.model.StatusTask;
 import com.yandex.kanban.model.Task;
+import com.yandex.kanban.model.TypeTask;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -17,7 +18,7 @@ class InMemoryHistoryManagerTest {
     void add() {
         List<Task> hystory = new ArrayList<>();
 
-        Task task1 = new Task(StatusTask.NEW, "сделать обычную задачу №1", "обычная задача №1");
+        Task task1 = new Task(StatusTask.NEW, "сделать обычную задачу №1", "обычная задача №1", TypeTask.TASK);
         historyManager.add(task1);
         hystory.add(task1);
 
@@ -26,11 +27,11 @@ class InMemoryHistoryManagerTest {
 
     @Test
     void removeCopiesListHystoryTest() {
-        Task task1 = new Task(StatusTask.NEW, "сделать обычную задачу №1", "обычная задача №1");
+        Task task1 = new Task(StatusTask.NEW, "сделать обычную задачу №1", "обычная задача №1", TypeTask.TASK);
         task1.setId(1);
-        Task task2 = new Task(StatusTask.NEW, "сделать обычную задачу №2", "обычная задача №2");
+        Task task2 = new Task(StatusTask.NEW, "сделать обычную задачу №2", "обычная задача №2", TypeTask.TASK);
         task2.setId(2);
-        Task task3 = new Task(StatusTask.NEW, "сделать обычную задачу №3", "обычная задача №3");
+        Task task3 = new Task(StatusTask.NEW, "сделать обычную задачу №3", "обычная задача №3", TypeTask.TASK);
         task3.setId(1);
         historyManager.add(task1);
         historyManager.add(task2);
@@ -41,11 +42,11 @@ class InMemoryHistoryManagerTest {
 
     @Test
     void orderAdditionListHystoryTest() {
-        Task task1 = new Task(StatusTask.NEW, "сделать обычную задачу №1", "обычная задача №1");
+        Task task1 = new Task(StatusTask.NEW, "сделать обычную задачу №1", "обычная задача №1", TypeTask.TASK);
         task1.setId(1);
-        Task task2 = new Task(StatusTask.NEW, "сделать обычную задачу №2", "обычная задача №2");
+        Task task2 = new Task(StatusTask.NEW, "сделать обычную задачу №2", "обычная задача №2", TypeTask.TASK);
         task2.setId(2);
-        Task task3 = new Task(StatusTask.NEW, "сделать обычную задачу №3", "обычная задача №3");
+        Task task3 = new Task(StatusTask.NEW, "сделать обычную задачу №3", "обычная задача №3", TypeTask.TASK);
         task3.setId(3);
 
         historyManager.add(task1);
@@ -62,7 +63,7 @@ class InMemoryHistoryManagerTest {
 
     @Test
     void removeTaskAndRemoveTaskHystoryTest() {
-        Task task1 = new Task(StatusTask.NEW, "сделать обычную задачу №1", "обычная задача №1");
+        Task task1 = new Task(StatusTask.NEW, "сделать обычную задачу №1", "обычная задача №1", TypeTask.TASK);
         task1.setId(1);
         historyManager.add(task1);
         historyManager.remove(1);

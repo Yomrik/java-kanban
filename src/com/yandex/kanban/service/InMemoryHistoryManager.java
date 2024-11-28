@@ -6,8 +6,8 @@ import java.util.*;
 
 public class InMemoryHistoryManager implements HistoryManager {
     private final Map<Integer, Node> listHystoryById = new HashMap<>();
-    public Node<Task> first;
-    public Node<Task> last;
+    private Node<Task> first;
+    private Node<Task> last;
 
     @Override
     public void add(Task task) {

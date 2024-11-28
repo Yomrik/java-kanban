@@ -2,6 +2,7 @@ package com.yandex.kanban.service;
 
 import com.yandex.kanban.model.StatusTask;
 import com.yandex.kanban.model.Task;
+import com.yandex.kanban.model.TypeTask;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -18,9 +19,9 @@ class FileBackedTaskManagerTest {
 
     @Test
     void saveTest() throws IOException {
-        FileBackedTaskManager data = new FileBackedTaskManager();
+        FileBackedTaskManager data = new FileBackedTaskManager("data.txt");
 
-        Task task4 = new Task(StatusTask.NEW, "сделать обычную задачу №1", "обычная задача №1");
+        Task task4 = new Task(StatusTask.NEW, "сделать обычную задачу №1", "обычная задача №1", TypeTask.TASK);
         data.addTask(task4);
 
         File file = File.createTempFile("test", ".tmp");
@@ -39,8 +40,8 @@ class FileBackedTaskManagerTest {
 
     @Test
     void fromStringTest() throws FileNotFoundException {
-        FileBackedTaskManager data = new FileBackedTaskManager();
-        Task task4 = new Task(StatusTask.NEW, "сделать обычную задачу №1", "обычная задача №1");
+        FileBackedTaskManager data = new FileBackedTaskManager("data.txt");
+        Task task4 = new Task(StatusTask.NEW, "сделать обычную задачу №1", "обычная задача №1", TypeTask.TASK);
         Task task = data.fromString("0,TASK,обычная задача №1,сделать обычную задачу №1,NEW");
         assertEquals(task4, task);
         File file1 = new File("data.txt");
@@ -51,8 +52,8 @@ class FileBackedTaskManagerTest {
 
     @Test
     void loadFromFileTest() throws IOException {
-        FileBackedTaskManager data = new FileBackedTaskManager();
-        Task task4 = new Task(StatusTask.NEW, "сделать обычную задачу №1", "обычная задача №1");
+        FileBackedTaskManager data = new FileBackedTaskManager("data.txt");
+        Task task4 = new Task(StatusTask.NEW, "сделать обычную задачу №1", "обычная задача №1", TypeTask.TASK);
         data.addTask(task4);
 
         File file = File.createTempFile("test", ".tmp");
@@ -62,7 +63,7 @@ class FileBackedTaskManagerTest {
 
         data.loadFromFile(file);
 
-        String line = data.getTasks().values().toString().replace("]", "");
+        String line = data.getListTask().toString().replace("]", "");
         String line1 = line.replace("[", "");
         String exp = "1,TASK,обычная задача №1,сделать обычную задачу №1,NEW";
 

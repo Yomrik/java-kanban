@@ -6,10 +6,11 @@ import java.util.Objects;
 
 public class EpicTask extends Task {
     private final List<Integer> subTaskIds = new ArrayList<>();
+    private TypeTask type;
 
-
-    public EpicTask(String description, String name) {
-        super(StatusTask.NEW, description, name);
+    public EpicTask(String description, String name, TypeTask type) {
+        super(StatusTask.NEW, description, name, TypeTask.EPICTASK);
+        this.type = type;
     }
 
     public List<Integer> getSubTaskIds() {

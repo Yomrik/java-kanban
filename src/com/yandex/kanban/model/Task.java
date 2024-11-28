@@ -9,10 +9,11 @@ public class Task {
     private StatusTask status;
     private TypeTask type;
 
-    public Task(StatusTask status, String description, String name) {
+    public Task(StatusTask status, String description, String name, TypeTask type) {
         this.status = status;
         this.description = description;
         this.name = name;
+        this.type = type;
     }
 
     @Override
