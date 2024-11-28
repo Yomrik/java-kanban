@@ -1,6 +1,9 @@
 package com.yandex.kanban.service;
 
-import com.yandex.kanban.model.*;
+import com.yandex.kanban.model.EpicTask;
+import com.yandex.kanban.model.StatusTask;
+import com.yandex.kanban.model.Subtask;
+import com.yandex.kanban.model.Task;
 
 import java.util.*;
 
